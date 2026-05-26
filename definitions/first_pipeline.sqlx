@@ -18,6 +18,6 @@ SELECT
     created_at,
     status,
     delivery_time_minutes,
-    row_number() over(partition by user_id) as trx_rank_by_user
+    row_number() over(partition by user_id) as trx_rank_per_user
 
 from `project-5bf2da38-3af5-48e5-860.epsilon_analytics.orders`
