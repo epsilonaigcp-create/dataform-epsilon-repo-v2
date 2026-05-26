@@ -1,0 +1,23 @@
+config {
+    type: "table",
+    database: "project-5bf2da38-3af5-48e5-860",
+    schema: "training_data",
+
+    name: "first_orders_pipeline",
+
+    partitionBy: "DATE(created_at)",
+    clusterBy: ["merchant_id", "status"]
+}
+
+
+SELECT
+    order_Id,
+    user_id,
+    merchant_id,
+    order_value,
+    created_at,
+    status,
+    delivery_time_minutes,
+    row_number() over(partition by user_id) as trx_rank_by_user
+
+from `project-5bf2da38-3af5-48e5-860.epsilon_analytics.orders`
